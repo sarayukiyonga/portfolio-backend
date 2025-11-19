@@ -28,7 +28,30 @@
                         Crear un nuevo proyecto desde cero
                     </p>
                 </a>
+                 {{-- ✅ AGREGAR ESTO --}}
+@if(auth()->user()->isAdmin())
+    <a href="{{ route('admin.users.index') }}" 
+       class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 transition">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+            👥 Usuarios
+        </h5>
+        <p class="font-normal text-gray-700">
+            Gestionar usuarios y permisos
+        </p>
+    </a>
+
+    <a href="{{ route('admin.roles.index') }}" 
+       class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 transition">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+            🔐 Roles
+        </h5>
+        <p class="font-normal text-gray-700">
+            Gestionar roles de usuario
+        </p>
+    </a>
+@endif
             </div>
+
 
             @php
                 $recentProjects = \App\Models\Project::orderBy('created_at', 'desc')->limit(8)->get();
@@ -122,6 +145,8 @@
                     </div>
                 </div>
             @endif
+           
         </div>
+        
     </div>
 </x-app-layout>

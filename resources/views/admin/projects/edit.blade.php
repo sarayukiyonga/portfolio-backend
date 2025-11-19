@@ -25,6 +25,11 @@
                         @csrf
                         @method('PUT')
 
+@if(auth()->check() && auth()->user()->hasRole('visitante'))
+    <div style="background-color: #fef3c7; border: 1px solid #fbbf24; color: #92400e; padding: 1rem; border-radius: 0.375rem; margin-bottom: 1rem;">
+        <strong>⚠️ Advertencia:</strong> Puedes ver el formulario pero no podrás guardar cambios. Solo los administradores pueden editar proyectos.
+    </div>
+@endif
                         {{-- Título --}}
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
@@ -333,7 +338,7 @@
                             </label>
                             <input type="text" name="year" id="year" value="{{ old('year', $project->year) }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
-
+ @if(auth()->check() && auth()->user()->isAdmin())
                         {{-- Publicado --}}
                         <div class="mb-6">
                             <label class="flex items-center">
@@ -341,15 +346,23 @@
                                 <span class="ml-2 text-sm text-gray-600">Publicar proyecto</span>
                             </label>
                         </div>
-
+@endif
                         {{-- Botones --}}
                         <div class="flex items-center justify-between">
                             <a href="{{ route('admin.projects.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-600">
                                 Cancelar
                             </a>
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
-                                Actualizar Proyecto
-                            </button>
+                            @if(auth()->check() && auth()->user()->isAdmin())
+    <button type="submit" class="btn btn-primary">
+        Actualizar Proyecto
+    </button>
+@else
+    <button type="button" 
+            disabled
+            style="background-color: #d1d5db; color: #6b7280; cursor: not-allowed; padding: 0.5rem 1rem; border-radius: 0.375rem;">
+        🔒 Solo Admin puede Actualizar
+    </button>
+@endif
                         </div>
                     </form>
 

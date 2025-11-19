@@ -412,7 +412,7 @@ function removeContentBlock(button) {
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    placeholder="2024">
                         </div>
-
+ @if(auth()->check() && auth()->user()->isAdmin())
                         <div class="mb-6">
                             <label class="flex items-center">
                                 <input type="checkbox" name="is_published" value="1" 
@@ -420,7 +420,7 @@ function removeContentBlock(button) {
                                 <span class="ml-2 text-sm text-gray-600">Publicar proyecto</span>
                             </label>
                         </div>
-
+@endif
                         <div class="flex items-center justify-between">
     <a href="{{ route('admin.projects.index') }}"
        class="inline-flex items-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">
