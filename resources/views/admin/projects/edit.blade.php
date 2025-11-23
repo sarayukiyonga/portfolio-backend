@@ -370,8 +370,8 @@
             </div>
         </div>
     </div>
-</x-app-layout>
 
+    
 <script>
 let blockCount = {{ $project->content_blocks ? count($project->content_blocks) : 0 }};
 let tinyMceReady = false;
@@ -422,7 +422,7 @@ function removeExistingContentBlock(button, index) {
 }
 
 // Drag & Drop para galería
-function() {
+(function() { 
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('gallery-input');
     const preview = document.getElementById('gallery-preview');
@@ -435,7 +435,7 @@ function() {
     });
     
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        dropZone.addEventListener(eventName', preventDefaults, false);
+        dropZone.addEventListener(eventName, preventDefaults, false);
         document.body.addEventListener(eventName, preventDefaults, false);
     });
     
@@ -577,3 +577,4 @@ function() {
     }
 })();
 </script>
+</x-app-layout>
